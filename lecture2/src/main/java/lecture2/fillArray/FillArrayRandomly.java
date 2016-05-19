@@ -3,7 +3,7 @@ import  java.util.Random;
 
 public class FillArrayRandomly {
 	private static Random random = new Random();
-	public static void FillArray(int[] inputArray) {
+	public static void fillArray(int[] inputArray) {
 		for(int i = 0 ;i < inputArray.length; i++) {
 			inputArray[i] = random.nextInt();
 		}	

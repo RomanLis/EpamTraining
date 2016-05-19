@@ -12,21 +12,21 @@ public class Main {
 		//
 		int[] testArray = new int[10];
 		SortAndSearch quickBinary = new QuickSortAndBinarySearch();
-		FillAndSort(quickBinary, testArray);
-		quickBinary.Search(testArray, 100500);
+		fillAndSort(quickBinary, testArray);
+		quickBinary.search(testArray, 100500);
 		System.out.println("\n");
 		
 		SortAndSearch coctailInterp = new CoctailSortAndInterpolatedSearch();
-		FillAndSort(coctailInterp, testArray);
-		coctailInterp.Search(testArray, 100500);
+		fillAndSort(coctailInterp, testArray);
+		coctailInterp.search(testArray, 100500);
 	}
 
-	public static void FillAndSort(SortAndSearch inputClass,int[] inputArray) {
+	public static void fillAndSort(SortAndSearch inputClass,int[] inputArray) {
 		//
-		FillArrayRandomly.FillArray(inputArray);
+		FillArrayRandomly.fillArray(inputArray);
 		System.out.println("class" + inputClass.toString());
 		System.out.println("Unsorted random array: " +Arrays.toString(inputArray));
-		inputClass.Sort(inputArray);
+		inputClass.sort(inputArray);
 		System.out.println("Sorted random array:   " +Arrays.toString(inputArray));
 	}
 }

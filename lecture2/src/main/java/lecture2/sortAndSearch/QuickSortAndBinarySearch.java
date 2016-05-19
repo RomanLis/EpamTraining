@@ -7,21 +7,21 @@ public class QuickSortAndBinarySearch extends SortAndSearch {
      */
 	
 	@Override
-	public void Sort(int[] inputArray) {
-		QSort(inputArray, 0, inputArray.length-1);
+	public void sort(int[] inputArray) {
+		qSort(inputArray, 0, inputArray.length-1);
 	}
 	
-	public static void QSort(int[] inputArray, int low, int hi) {
+	public static void qSort(int[] inputArray, int low, int hi) {
     	if(inputArray != null) {
 	    	if (low < hi) {
-	                int pivot = Partition(inputArray, low, hi);
-	                QSort(inputArray, low, pivot - 1);
-	                QSort(inputArray, pivot + 1, hi);
+	                int pivot = partition(inputArray, low, hi);
+	                qSort(inputArray, low, pivot - 1);
+	                qSort(inputArray, pivot + 1, hi);
 	    	}
     	}   	
     }
 	
-    public static int Partition(int[] inputArray, int low, int hi) {
+    public static int partition(int[] inputArray, int low, int hi) {
     	int x = inputArray[hi];
     	int i = low - 1;
     	int swap;
@@ -44,7 +44,7 @@ public class QuickSortAndBinarySearch extends SortAndSearch {
      * Binary Search 
      */
     @Override 
-    public int Search(int[] inputArray,int x) {
+    public int search(int[] inputArray,int x) {
 		int i = -1;
 		if (inputArray != null) {
 			int low = 0, high = inputArray.length, mid;

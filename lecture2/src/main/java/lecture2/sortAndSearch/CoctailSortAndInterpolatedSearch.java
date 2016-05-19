@@ -6,7 +6,7 @@ public class CoctailSortAndInterpolatedSearch extends SortAndSearch {
      */
 	
 	@Override
-	public  int Search(int[] inputArray, int x) {
+	public  int search(int[] inputArray, int x) {
 		if(inputArray != null) {
 			int low = 0;
 			int high = inputArray.length-1;
@@ -45,7 +45,7 @@ public class CoctailSortAndInterpolatedSearch extends SortAndSearch {
      */
 	
 	@Override
-	public void Sort(int[] inputArray) {
+	public void sort(int[] inputArray) {
 		if(inputArray != null) {
 			int firstUnsortedElement = 0;
     		int lastUnsortedElement = inputArray.length-1;
