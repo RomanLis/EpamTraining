@@ -1,3 +1,7 @@
+package main;
+
+import runner.Runner;
+
 /**
  * Created by Р on 03.06.2016.
  */

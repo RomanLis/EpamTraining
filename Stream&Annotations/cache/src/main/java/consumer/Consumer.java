@@ -12,10 +12,8 @@ public class Consumer  {
         if(cache == null) {
             System.out.println("cache = null");
         } else {
-            System.out.println("/****************************************/");
             System.out.println("/*   printed inside printCache method   */");
             System.out.println("/*  cache is: \""+cache.getNote(1)+"\""+"  */");
-            System.out.println("/****************************************/");
         }
     }
 }

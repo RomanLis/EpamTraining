@@ -14,10 +14,8 @@ public class ConsumerTwo extends Consumer
         if(cacheTwo == null) {
             System.out.println("cache = null");
         } else {
-            System.out.println("/****************************************/");
             System.out.println("/*   printed inside printCache method   */");
             System.out.println("/*  cache is: \""+cacheTwo.getNote(1)+"\""+"  */");
-            System.out.println("/****************************************/");
         }
     }
 }
