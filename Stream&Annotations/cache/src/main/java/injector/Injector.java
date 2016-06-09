@@ -1,14 +1,13 @@
 package injector;
 
+import cachecreator.CacheCreator;
 import consumer.InjectCache;
-import myCache.Cache;
-import myCache.CacheOne;
-import myCache.CacheThree;
-import myCache.CacheTwo;
+import mycache.Cache;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Р on 04.06.2016.
@@ -16,69 +15,53 @@ import java.util.Arrays;
 public class Injector {
 
 
-    public static void inject(Object inputObject)  {
+    public static void inject(Object inputObject) throws TypeNotPresentException {
 
-        ArrayList<Class> cacheClasses;
-        cacheClasses = getAllCacheAnnotatedClasses();
-        ArrayList<Field> consumerFields;
-        consumerFields = getAllCacheAnnotatedFields(getAllParents(inputObject.getClass()));
+        List<Object> cacheObjects = CacheCreator.getAllCaches();
+        List<Field> consumerFields = getAllCacheAnnotatedFields(getAllParents(inputObject.getClass()));
         String annotationName;
         try {
-            for(Field field: consumerFields) {
+            for (Field field : consumerFields) {
                 field.setAccessible(true);
                 annotationName = field.getAnnotation(InjectCache.class).name();
                 boolean cacheAnnotationNotFound = true;
-                for(Class<?> cacheClass: cacheClasses) {
-                    if (annotationName.equals(cacheClass.getAnnotation(Cache.class).name())){
+                for (Object cacheObject : cacheObjects) {
+                    if (annotationName.equals(cacheObject.getClass().getAnnotation(Cache.class).name())) {
                         cacheAnnotationNotFound = false;
-                        field.set(inputObject,cacheClass.newInstance());
+                        field.set(inputObject, cacheObject);
                     }
                 }
-                if (cacheAnnotationNotFound){
-                    throw new TypeNotPresentException(Cache.class.toString(),null);
+                if (cacheAnnotationNotFound) {
+                    throw new TypeNotPresentException(Cache.class.getTypeName(), null);
                 }
             }
-        }catch (TypeNotPresentException | IllegalAccessException | InstantiationException  e){
-            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    private static ArrayList<Class> getAllCacheAnnotatedClasses() {
-        ArrayList<Class> caches = new ArrayList<Class>();
-        caches.add(CacheOne.class);
-        caches.add(CacheTwo.class);
-        caches.add(CacheThree.class);
+    private static List<Class> getAllParents(Class inputClass) {
+        List<Class> parentsList = new ArrayList<Class>();
 
-        return caches;
-    }
-
-    private static ArrayList<Class> getAllParents(Class inputClass) {
-        ArrayList<Class> parentsList= new ArrayList<Class>();
-        parentsList.add(inputClass);
-
-        while(true) {
-            inputClass = inputClass.getSuperclass();
-            if(inputClass==null) {
-                break;
-            } else {
-                parentsList.add(inputClass);
-            }
+        for (; inputClass != null; inputClass = inputClass.getSuperclass()) {
+            parentsList.add(inputClass);
         }
-        //System.out.println("Parents List: "+parentsList);
+        System.out.println("Parents List: " + parentsList);
         return parentsList;
     }
-    private static  ArrayList<Field> getAllCacheAnnotatedFields(ArrayList<Class> inputList) {
 
-        ArrayList<Field> allParentsFields = new ArrayList<Field>();
-        for(int i=0;i<inputList.size();i++) {
+    private static List<Field> getAllCacheAnnotatedFields(List<Class> inputList) {
+
+        List<Field> allParentsFields = new ArrayList<Field>();
+        for (int i = 0; i < inputList.size(); i++) {
             allParentsFields.addAll((Arrays.asList(inputList.get(i).getDeclaredFields())));
         }
-        for(int i =0;i<allParentsFields.size();i++) {
-            if(!allParentsFields.get(i).isAnnotationPresent(InjectCache.class)) {
+        for (int i = 0; i < allParentsFields.size(); i++) {
+            if (!allParentsFields.get(i).isAnnotationPresent(InjectCache.class)) {
                 allParentsFields.remove(i);
             }
         }
-        //System.out.println("Parents Fields: "+allParentsFields+"\n");
+        System.out.println("Parents Fields: " + allParentsFields + "\n");
         return allParentsFields;
     }
 }

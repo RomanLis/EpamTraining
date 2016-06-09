@@ -1,4 +1,4 @@
-package myCache;
+package mycache;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,13 +9,18 @@ import java.util.Map;
 @Cache(name = "CacheTwo")
 public class CacheTwo implements ICache {
 
-    private static Map<Integer, String> hashMap = new HashMap<Integer, String>();
+    private Map<Integer, String> hashMap = new HashMap<Integer, String>();
 
-    public void setNote(Integer key, String note) {
+    public void setNote(String note, int key) {
         hashMap.put(key, note);
     }
 
     public String getNote(Integer key) {
         return hashMap.get(key);
+    }
+
+    @Override
+    public String toString() {
+        return "CacheTwo";
     }
 }

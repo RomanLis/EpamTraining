@@ -10,26 +10,33 @@ public class Person {
     private String name;
     private int age;
     private Sex sex;
-    public void setName(String newName){
+
+    public void setName(String newName) {
         this.name = newName;
     }
-    public void setAge(Integer newAge){
+
+    public void setAge(Integer newAge) {
         this.age = newAge;
     }
-    public void setSex(Sex newSex){
+
+    public void setSex(Sex newSex) {
         sex = newSex;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public Integer getAge(){
+
+    public int getAge() {
         return age;
     }
-    public Sex getSex(){
+
+    public Sex getSex() {
         return sex;
     }
+
     @Override
-    public String toString(){
-        return "[Person: " + name + ", " + age + ", "+ sex +"]";
+    public String toString() {
+        return "[Person: " + name + ", " + age + ", " + sex + "]";
     }
 }
