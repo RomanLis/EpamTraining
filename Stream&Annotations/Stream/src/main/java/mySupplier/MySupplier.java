@@ -1,4 +1,4 @@
-package mySupplier;
+package mysupplier;
 
 import person.Person;
 import sex.Sex;

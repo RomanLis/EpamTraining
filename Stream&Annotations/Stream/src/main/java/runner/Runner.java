@@ -1,6 +1,6 @@
 package runner;
 
-import mySupplier.MySupplier;
+import mysupplier.MySupplier;
 import person.Person;
 import sex.Sex;
 
